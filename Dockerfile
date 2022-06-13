@@ -1,12 +1,13 @@
 FROM node:16-bullseye
-# RUN useradd -ms /bin/bash developer
+ARG user=developer
+# RUN useradd -ms /bin/bash ${user}
+# USER ${user}
+WORKDIR /${user}/docker-vue3
 RUN yarn global add http-server
-# USER developer
-WORKDIR /docker-vue3
 COPY package*.json .
 RUN yarn install
 COPY . .
-# ENV EXPOSE_PORT=ENV["EXPOSE_DOCKER_PORT"]
-EXPOSE 8080
-RUN yarn run build
+RUN yarn build
+ENV EXPOSE_PORT=8080
+EXPOSE ${EXPOSE_PORT}
 CMD [ "http-server", "dist"]
