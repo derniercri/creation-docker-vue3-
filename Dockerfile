@@ -1,8 +1,8 @@
 FROM node:16-bullseye
 ARG user=developer
-# RUN useradd -ms /bin/bash ${user}
-# USER ${user}
-WORKDIR /${user}/docker-vue3
+RUN useradd -ms /bin/bash ${user}
+USER ${user}
+WORKDIR /home/${user}/docker-vue3
 RUN yarn global add http-server
 COPY package*.json .
 RUN yarn install
