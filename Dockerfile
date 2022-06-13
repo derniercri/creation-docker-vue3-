@@ -1,6 +1,12 @@
-FROM node:latest
-WORKDIR /creation-docker-vue3
-COPY . .
-EXPOSE 3000
+FROM node:16-bullseye
+# RUN useradd -ms /bin/bash developer
+RUN yarn global add http-server
+# USER developer
+WORKDIR /docker-vue3
+COPY package*.json .
 RUN yarn install
-CMD ["yarn","run","dev","--host"]
+COPY . .
+# ENV EXPOSE_PORT=ENV["EXPOSE_DOCKER_PORT"]
+EXPOSE 8080
+RUN yarn run build
+CMD [ "http-server", "dist"]
