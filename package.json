@@ -1,6 +1,6 @@
 {
   "name": "isaac-book",
-  "version": "0.0.0",
+  "version": "0.0.14",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
